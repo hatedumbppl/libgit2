@@ -20,6 +20,10 @@
 #define GIT_INDEX_FILE "index"
 #define GIT_INDEX_FILE_MODE 0666
 
+/* Helper to create index options based on repository options */
+#define GIT_INDEX_OPTIONS_FOR_REPO(r) \
+	{ GIT_INDEX_OPTIONS_VERSION, r ? r->oid_type : 0 }
+
 extern bool git_index__enforce_unsaved_safety;
 
 struct git_index {
@@ -142,17 +146,6 @@ GIT_INLINE(unsigned char *) git_index__checksum(git_index *index)
 {
 	return index->checksum;
 }
-
-/* SHA256-aware internal functions */
-
-extern int git_index__new(
-	git_index **index_out,
-	git_oid_t oid_type);
-
-extern int git_index__open(
-	git_index **index_out,
-	const char *index_path,
-	git_oid_t oid_type);
 
 /* Copy the current entries vector *and* increment the index refcount.
  * Call `git_index__release_snapshot` when done.

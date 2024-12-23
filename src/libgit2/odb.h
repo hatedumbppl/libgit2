@@ -160,13 +160,6 @@ void git_odb_object__free(void *object);
 
 /* SHA256 support */
 
-int git_odb__new(git_odb **out, const git_odb_options *opts);
-
-int git_odb__open(
-	git_odb **out,
-	const char *objects_dir,
-	const git_odb_options *opts);
-
 int git_odb__hash(
 	git_oid *out,
 	const void *data,
