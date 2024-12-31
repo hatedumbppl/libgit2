@@ -46,6 +46,7 @@ include(SelectZlib)
 include(SelectI18n)
 include(SelectAuthNTLM)
 include(SelectAuthNegotiate)
+include(SelectNsec)
 
 #
 # Platform support
@@ -108,22 +109,6 @@ elseif(CMAKE_SIZEOF_VOID_P)
 	message(FATAL_ERROR "Unsupported architecture (pointer size is ${CMAKE_SIZEOF_VOID_P} bytes)")
 else()
 	message(FATAL_ERROR "Unsupported architecture (CMAKE_SIZEOF_VOID_P is unset)")
-endif()
-
-# nanosecond mtime/ctime support
-
-if(USE_NSEC)
-	set(GIT_USE_NSEC 1)
-endif()
-
-# high-resolution stat support
-
-if(HAVE_STRUCT_STAT_ST_MTIM)
-	set(GIT_USE_STAT_MTIM 1)
-elseif(HAVE_STRUCT_STAT_ST_MTIMESPEC)
-	set(GIT_USE_STAT_MTIMESPEC 1)
-elseif(HAVE_STRUCT_STAT_ST_MTIME_NSEC)
-	set(GIT_USE_STAT_MTIME_NSEC 1)
 endif()
 
 # realtime support
